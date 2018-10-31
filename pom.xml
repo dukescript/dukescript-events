@@ -20,7 +20,32 @@
         <url>https://github.com/dukescript/dukescript-events.git</url>
         <developerConnection>scm:git:https://github.com/dukescript/dukescript-events.git</developerConnection>
         <tag>release-${releaseVersion}</tag>
-    </scm>  
+    </scm>
+    <description>A Java API for receiving events from a HTML Element in DukeScript.</description>
+    <developers>
+        <developer>
+            <id>monacotoni</id>
+            <name>Anton Epple</name>
+            <email>toni.epple@dukescript.com</email>
+            <organization>Dukehoff GmbH</organization>
+            <organizationUrl>http://www.dukescript.com</organizationUrl>
+            <roles>
+                <role>Project-Administrator</role>
+                <role>Developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+    </developers>
+    
+    <licenses>
+        <license>
+            <name>MIT</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <comments>
+                Events API is free to use with the MIT license.
+            </comments>
+        </license>
+    </licenses>
     <repositories>
         <repository>
             <id>netbeans</id>
