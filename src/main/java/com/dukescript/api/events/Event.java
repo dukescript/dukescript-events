@@ -44,7 +44,7 @@ public class Event<T> {
     /**
      * Get the source of the Event. The source is typically set once via EventSource 
      * create method.
-     * @return 
+     * @return the source of this event.
      */
     public T getSource() {
         return source;
@@ -53,7 +53,7 @@ public class Event<T> {
     /**
      * The type of this Event, for example MouseEvent.MOUSE_PRESSED. Events 
      * are always dispatched for their Type and also all supertypes.
-     * @return 
+     * @return the Type of this event.
      */
     public Type getType() {
         return type;
@@ -62,7 +62,7 @@ public class Event<T> {
     /**
      * Event Type allows to build a hierarchy of events. E.g. the supertype of
      * MouseEvent.MOUSE_PRESSED is MouseEvent.ANY.
-     * @param <T> 
+     * @param <T> The event class this type applies to
      */
     public static class Type<T extends Event> {
 
@@ -70,9 +70,9 @@ public class Event<T> {
         private final Type superType;
 
         /**
-         * Create anew Type with name and supertype.
-         * @param name
-         * @param superType 
+         * Create a new Type with name and supertype.
+         * @param name A descriptive, unique String describing the event.
+         * @param superType The supertype of this Event Type.
          */
         public Type(String name, Type superType) {
             this.name = name;
@@ -81,7 +81,7 @@ public class Event<T> {
 
         /**
          * Name of this Event Type
-         * @return 
+         * @return the name.
          */
         public String getName() {
             return name;
@@ -89,7 +89,7 @@ public class Event<T> {
 
         /**
          * Super Type of this Event Type.
-         * @return 
+         * @return the supertype.
          */
         public Type getSuperType() {
             return superType;

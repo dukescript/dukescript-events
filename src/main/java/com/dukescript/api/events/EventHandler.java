@@ -35,7 +35,7 @@ package com.dukescript.api.events;
 public interface EventHandler<T extends Event> {
     /**
      * Implement your Event response here.
-     * @param event 
+     * @param event The event you registered this handler for.
      */
     public void handle (T event);
 }
