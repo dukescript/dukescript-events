@@ -48,14 +48,8 @@ public class MouseEvent<T> extends Event<T>{
     public static final Event.Type<MouseEvent> MOUSE_CLICKED =
             new Event.Type<MouseEvent>("MOUSE_CLICKED",ANY);
 
-    public static final Event.Type<MouseEvent> MOUSE_ENTERED_TARGET =
-            new Event.Type<MouseEvent>("MOUSE_ENTERED_TARGET",ANY);
-
     public static final Event.Type<MouseEvent> MOUSE_ENTERED =
             new Event.Type<MouseEvent>( "MOUSE_ENTERED",ANY);
-
-    public static final Event.Type<MouseEvent> MOUSE_EXITED_TARGET =
-            new Event.Type<MouseEvent>( "MOUSE_EXITED_TARGET",ANY);
 
     public static final Event.Type<MouseEvent> MOUSE_EXITED =
             new Event.Type<MouseEvent>( "MOUSE_EXITED",ANY);
@@ -63,8 +57,6 @@ public class MouseEvent<T> extends Event<T>{
     public static final Event.Type<MouseEvent> MOUSE_MOVED =
             new Event.Type<MouseEvent>("MOUSE_MOVED",ANY);
 
-    public static final Event.Type<MouseEvent> MOUSE_DRAGGED =
-            new Event.Type<MouseEvent>("MOUSE_DRAGGED",ANY);
 
     private double x;
     private double y;

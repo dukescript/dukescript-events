@@ -146,26 +146,45 @@ public class EventManager<S> extends EventSource<S> {
         }
     }
 //  mousedown, mouseenter, mouseleave, mousemove, mouseout, mouseover, mouseup,
+    boolean mouseDown = false;
+
+    public void mouseMoved(int realX, int realY) {
+        if (ed != null) {
+            ed.dispatchEvent(new MouseEvent<S>(source, MouseEvent.MOUSE_MOVED, realX, realY));
+            if (mouseDown) {
+                ed.dispatchEvent(new MouseEvent<S>(source, MouseEvent.MOUSE_PRESSED, realX, realY));
+            }
+
+        }
+    }
 
     public void mouseClick(int realX, int realY) {
+        mouseDown = false;
         if (ed != null) {
             ed.dispatchEvent(new MouseEvent<S>(source, MouseEvent.MOUSE_CLICKED, realX, realY));
         }
     }
 
-    public void mousePressed(int realX, int realY) {
+    public void mouseDown(int realX, int realY) {
+        mouseDown = true;
         if (ed != null) {
             ed.dispatchEvent(new MouseEvent<S>(source, MouseEvent.MOUSE_PRESSED, realX, realY));
         }
     }
 
     public void mouseUp(int realX, int realY) {
+        mouseDown = false;
         if (ed != null) {
             ed.dispatchEvent(new MouseEvent<S>(source, MouseEvent.MOUSE_RELEASED, realX, realY));
         }
     }
-    
+
     public void mouseEntered(int realX, int realY) {
+        if (ed != null) {
+            ed.dispatchEvent(new MouseEvent<S>(source, MouseEvent.MOUSE_ENTERED, realX, realY));
+        }
+    }
+    public void mouseExited(int realX, int realY) {
         if (ed != null) {
             ed.dispatchEvent(new MouseEvent<S>(source, MouseEvent.MOUSE_ENTERED, realX, realY));
         }

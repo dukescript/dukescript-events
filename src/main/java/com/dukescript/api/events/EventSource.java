@@ -91,28 +91,33 @@ public abstract class EventSource<S> {
      * @return a new EventSource.
      */
     public static <S> EventSource create(S source, String id) {       
-        return create(source, Element.getElementbyId(id));
+        return create(source, Element.getElementbyId(id),false);
     }
 
-    /**
-     * Create a new EventSource for the whole document identified by the id and
+     /**
+     * Create a new EventSource for the HTML Element identified by the id and
      * pass an object, which will be used as the source in any Event. Typically
      * the source is an object that represents the element, like a
-     * GraphicsContext in case of a Canvas.
+     * GraphicsContext in case of a Canvas. The parameter documentFiresKeyEvents
+     * allows you to get all keyevents even if your Element doesn't have the focus.
+     * This is a typical behaviour for games. 
      *
-     * @since 0.2
      * @param <S> The type of the source object that will be used when
      * dispatching events.
      * @param source The object that will be the source in all events from this
      * EventSource.
+     * @param id The id of the HTML-Element you want to receive events from.
+     * @param documentFiresKeyEvents if true document fires keyevents instead of element
+     * @return a new EventSource.
      */
-    public static <S> EventSource createForDocument(S source) {
-        return create(source, Element.getDocument());
+    public static <S> EventSource create(S source, String id, boolean documentFiresKeyEvents) {       
+        return create(source, Element.getElementbyId(id),documentFiresKeyEvents);
     }
 
-    private static <S> EventSource create(S source, Element e) {
+    private static <S> EventSource create(S source, Element e, boolean pageWideKeyEvents) {
         EventManager<S> eventManager = new EventManager<S>(source);
-        EventRegistration.registerKeyEvents(eventManager, e);
+        if (pageWideKeyEvents)EventRegistration.registerKeyEvents(eventManager, Element.getDocument());
+        else EventRegistration.registerKeyEvents(eventManager, e);
         EventRegistration.registerMouseEvents(eventManager, e);
         EventRegistration.registerTouchEvents(eventManager, e);
         return eventManager;
