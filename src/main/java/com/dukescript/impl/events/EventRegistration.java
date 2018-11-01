@@ -33,9 +33,8 @@ import net.java.html.js.JavaScriptBody;
  */
 public class EventRegistration {
 
-    @JavaScriptBody(args = {"toolkit", "id"}, javacall = true, body
-            = "var e = document.getElementById(id);\n"
-            + "e.addEventListener('touchstart',function (event) {"
+    @JavaScriptBody(args = {"toolkit", "e"}, javacall = true, body
+            = "e.addEventListener('touchstart',function (event) {"
             + "   event.preventDefault();\n"
             + "   var touches = event.touches;\n"
             + "   var result = []; "
@@ -79,18 +78,16 @@ public class EventRegistration {
             + "  if(result.length>0) {toolkit.@com.dukescript.impl.events.EventManager::touchCancel([Ljava/lang/Object;)(result);}\n"
             + "});"
     )
-    public static native void registerTouchEvents(EventManager toolkit, String id);
+    public static native void registerTouchEvents_impl(EventManager toolkit, Object id);
 
-    @JavaScriptBody(args = {"toolkit", "id"}, javacall = true, body
+    @JavaScriptBody(args = {"toolkit", "e"}, javacall = true, body
             = "var mousepressed = false;"
-            + "var e = document.getElementById(id);\n"
             + "e.addEventListener('mousedown', function (event) {\n"
             + "   event.preventDefault();\n"
             + "    mousepressed = true;"
             + "    var rect = e.getBoundingClientRect();"
             + "    var realX = event.clientX - rect.left;"
             + "    var realY = event.clientY -rect.top;"
-            //            + "    toolkit.@com.dukescript.impl.events.EventManager::mouseDown(II)(realX, realY);"
             + "});\n"
             + "e.addEventListener('mousemove', function (event) {\n"
             + "    var rect = e.getBoundingClientRect();"
@@ -112,11 +109,10 @@ public class EventRegistration {
             + "  toolkit.@com.dukescript.impl.events.EventManager::mouseUp(II)(realX, realY);"
             + "});\n"
     )
-    public static native void registerMouseEvents(EventManager toolkit, String id);
+    public static native void registerMouseEvents_impl(EventManager toolkit, Object e);
 
-    @JavaScriptBody(args = {"toolkit", "id"}, javacall = true, body
-            = "var e = document.getElementById(id);\n"
-            + "e.addEventListener('keypress', function (event) {\n"
+    @JavaScriptBody(args = {"toolkit", "e"}, javacall = true, body
+            = "e.addEventListener('keypress', function (event) {\n"
             + "  toolkit.@com.dukescript.impl.events.EventManager::keyPress(I)(event.keyCode);"
             + "});\n"
             + "e.addEventListener('keyup', function (event) {\n"
@@ -126,5 +122,17 @@ public class EventRegistration {
             + "  toolkit.@com.dukescript.impl.events.EventManager::keyDown(I)(event.keyCode);"
             + "});\n"
     )
-    public static native void registerKeyEvents(EventManager toolkit, String id);
+    public static native void registerKeyEvents_impl(EventManager toolkit, Object e);
+
+    public static <S> void registerKeyEvents(EventManager<S> eventManager, Element e) {
+        registerKeyEvents_impl(eventManager, e.getDelegate());
+    }
+
+    public static <S> void registerMouseEvents(EventManager<S> eventManager, Element e) {
+        registerMouseEvents_impl(eventManager, e.getDelegate());
+    }
+
+    public static <S> void registerTouchEvents(EventManager<S> eventManager, Element e) {
+        registerTouchEvents_impl(eventManager, e.getDelegate());
+    }
 }

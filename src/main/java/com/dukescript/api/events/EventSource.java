@@ -25,6 +25,7 @@ package com.dukescript.api.events;
  * THE SOFTWARE.
  * #L%
  */
+import com.dukescript.impl.events.Element;
 import com.dukescript.impl.events.EventManager;
 import com.dukescript.impl.events.EventRegistration;
 
@@ -77,7 +78,7 @@ public abstract class EventSource<S> {
     public abstract <T extends Event> void removeEventHandler(Event.Type<T> type, EventHandler<T> handler);
 
     /**
-     * Create a new EventSource for the HTML Elemnt identified by the id and
+     * Create a new EventSource for the HTML Element identified by the id and
      * pass an object, which will be used as the source in any Event. Typically
      * the source is an object that represents the element, like a
      * GraphicsContext in case of a Canvas.
@@ -89,11 +90,31 @@ public abstract class EventSource<S> {
      * @param id The id of the HTML-Element you want to receive events from.
      * @return a new EventSource.
      */
-    public static <S> EventSource create(S source, String id) {
-        EventManager<S> eventManager = new EventManager<S>(source, id);
-        EventRegistration.registerKeyEvents(eventManager, id);
-        EventRegistration.registerMouseEvents(eventManager, id);
-        EventRegistration.registerTouchEvents(eventManager, id);
+    public static <S> EventSource create(S source, String id) {       
+        return create(source, Element.getElementbyId(id));
+    }
+
+    /**
+     * Create a new EventSource for the whole document identified by the id and
+     * pass an object, which will be used as the source in any Event. Typically
+     * the source is an object that represents the element, like a
+     * GraphicsContext in case of a Canvas.
+     *
+     * @since 0.2
+     * @param <S> The type of the source object that will be used when
+     * dispatching events.
+     * @param source The object that will be the source in all events from this
+     * EventSource.
+     */
+    public static <S> EventSource createForDocument(S source) {
+        return create(source, Element.getDocument());
+    }
+
+    private static <S> EventSource create(S source, Element e) {
+        EventManager<S> eventManager = new EventManager<S>(source);
+        EventRegistration.registerKeyEvents(eventManager, e);
+        EventRegistration.registerMouseEvents(eventManager, e);
+        EventRegistration.registerTouchEvents(eventManager, e);
         return eventManager;
     }
 

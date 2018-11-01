@@ -49,10 +49,9 @@ public class EventManager<S> extends EventSource<S> {
     private final S source;
     private final EventDispatcher ed;
 
-    public EventManager(S source, String id) {
+    public EventManager(S source) {
         this.source = source;
         this.ed = new EventDispatcher();
-
     }
 
     @Override
