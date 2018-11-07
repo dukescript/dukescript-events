@@ -4,6 +4,16 @@ Events for DukeScript
 With this library you can add simple Java event handling to HTML Elements. A typical
 use would be to combine it with our [Canvas API](https://dukescript.com/javadoc/canvas/).
 
+You can add it to your project with Maven:
+
+```xml
+<dependency>
+    <groupId>com.dukescript.events</groupId>
+    <artifactId>events-api</artifactId>
+    <version>0.3</version>
+</dependency>
+```
+
 
 To do so simply create a new Canvas and add the following snippet:
 
