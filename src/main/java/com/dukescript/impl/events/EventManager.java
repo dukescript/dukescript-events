@@ -186,7 +186,7 @@ public class EventManager<S> extends EventSource<S> {
     }
     public void mouseExited(int realX, int realY) {
         if (ed != null) {
-            ed.dispatchEvent(new MouseEvent<S>(source, MouseEvent.MOUSE_ENTERED, realX, realY));
+            ed.dispatchEvent(new MouseEvent<S>(source, MouseEvent.MOUSE_EXITED, realX, realY));
         }
     }
 }
