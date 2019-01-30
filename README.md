@@ -17,7 +17,7 @@ You can add it to your project with Maven:
 
 To do so simply create a new Canvas and add the following snippet:
 
-{% highlight java %}
+```java
 GraphicsContext2D ctx = GraphicsContext2D.getOrCreate("canvas");       
 
 EventSource es = EventSource.create(ctx, "canvas");
@@ -29,7 +29,7 @@ es.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
         g2d.fillCircle((float) event.getX(), (float) event.getY(), 10);
     }
 });
-{% endhighlight %}
+
 
 We made it fully pluggable, so it won't interfere with your own EventHandling if you 
 have implemented your own. The library supports KeyEvents, TouchEvents and MouseEvents.
