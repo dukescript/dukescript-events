@@ -78,7 +78,7 @@ public class EventRegistration {
             + "  if(result.length>0) {toolkit.@com.dukescript.impl.events.EventManager::touchCancel([Ljava/lang/Object;)(result);}\n"
             + "});"
     )
-    public static native void registerTouchEvents_impl(EventManager toolkit, Object id);
+    public static native void registerTouchEvents_impl(EventManager toolkit, Object e);
 
     @JavaScriptBody(args = {"toolkit", "e"}, javacall = true, body
             =  "e.addEventListener('mousedown', function (event) {\n"
